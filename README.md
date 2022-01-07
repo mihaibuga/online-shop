@@ -1,9 +1,5 @@
 <div id="top"></div>
 
-<!-- PROJECT SHIELDS -->
-[![Contributors][contributors-shield]][contributors-url]
-
-
 # Online Shop
 
 <!-- TABLE OF CONTENTS -->
@@ -237,5 +233,3 @@ Thanks for all the support to the Codecool mentors that have guided us!
 [delivery-details]: src/Codecool.CodecoolShop/wwwroot/img/captures/delivery-details.png
 [successful-order]: src/Codecool.CodecoolShop/wwwroot/img/captures/successful-order.png
 [placed-order-details]: src/Codecool.CodecoolShop/wwwroot/img/captures/placed-order-details.png
-
-[product-screenshot]: images/screenshot.png
