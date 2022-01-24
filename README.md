@@ -147,34 +147,57 @@ Used Dashboard - Order Details:
 
 ### Installation
 
-- Create a database
-- Fill in the Stripe - SecretKey, Sendgrid - ApiKey and ConnectionStrings - CodecoolShop fields in appsettings.js or paste the following structure in secrets.json file of the project:
-    
-    ```json
-    {
+- Create a MSSQL database
+- Go to appsettings.json -> Fill in the ConnectionStrings section with the database Connection String
+
+  ```json
       "ConnectionStrings": {
         "CodeCoolShop": "<your-database-connection-string-comes-here>",
-      },
+      }
+  ```
+- In Visual Studio open the Package Manager Console from Tools → Library Package Manager → Package Manager Console and then run the `enable-migrations` command (make sure that the default project is the "DataAccessLayer").
+![enbale-database.png][enable-database]
+- Then run `Update-Database` in the Package Manager Console to seed the database
+![update-database.png][update-database]
+
+- Create a Stripe account [here][registerStripe]
+- Go to appsettings.json ->Fill in the Stripe - SecretKey and Publishable Key [how to locate them in your Stripe account][stripeKey]
+    ```json
       "Stripe": {
-        "SecretKey": "<your-stripe-secret-key-comes-here>"
+        "SecretKey": "<your-stripe-secret-key-comes-here>",
+         "PublishableKey": "<your-stripe-publishable-key-comes-here>"
       },
+    ```
+- Create a SendGrid account [here](https://signup.sendgrid.com/)
+- Go to appsettings.json -> Fill in the ApiKey related to your Sendgrid account. Take a look on how to create it in your account [here][sendgrid-key]
+	```json
       "Sendgrid": {
         "ApiKey": "<your-sendgrid-api-key-comes-here>"
       }
-    }
-    ```
-    
-- Fill in other details related to Sendgrid and Stripe according to your data
-- Update the database from the Package Manager Console
+	```
+- Create you sender profile on SendGrid and update the field from appsettings.json
+	```json
+      "Sendgrid": {
+        "SenderEmail": "<your-sender-email-comes-here>"
+      }
+	```
+- Create dynamic template for Order Confirmation => use this html template [here][order-email]
+-  Create dynamic template for Register Confirmation => use this html template [here][registration-email]
+- Update the templates ids
+	```json
+      "Sendgrid": {
+            "OrderConfirmationTemplateId": "<email-template-id>",
+            "AccountConfirmationTemplateId": "<email-template-id>"
+      }
+	```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Run the project with IIS Express or with Local IIS version to get events logged with Serilog.
+Run the project with Kestrel Server and get events logged with Serilog.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -221,7 +244,14 @@ Thanks for all the support to the Codecool mentors that have guided us!
 [nicolae-peptea]: https://github.com/Nicolae-Peptea
 
 [sendgrid]: https://sendgrid.com/
+[sendgrid-key]: https://docs.sendgrid.com/ui/account-and-settings/api-keys#managing-api-keys
+[order-email]: https://res.cloudinary.com/dqwtm9fw1/raw/upload/v1642501179/CodeCoolShop/email-confirmation_tsqcmw.html
+[registration-email]: https://res.cloudinary.com/dqwtm9fw1/raw/upload/v1642501179/CodeCoolShop/email-confirmation_tsqcmw.html
+
 [stripe]: https://stripe.com/
+[stripeKey]: https://support.stripe.com/questions/locate-api-keys-in-the-dashboard#:~:text=Locate%20API%20keys%20in%20the%20Dashboard%20%3A%20Stripe%3A%20Help%20%26%20Support&text=Users%20with%20Administrator%20permissions%20can,and%20clicking%20on%20API%20Keys
+[registerStripe]: https://dashboard.stripe.com/register
+
 [serilog]: https://serilog.net/
 
 [home-page]: src/Codecool.CodecoolShop/wwwroot/img/captures/home-page.png
@@ -235,3 +265,5 @@ Thanks for all the support to the Codecool mentors that have guided us!
 [delivery-details]: src/Codecool.CodecoolShop/wwwroot/img/captures/delivery-details.png
 [successful-order]: src/Codecool.CodecoolShop/wwwroot/img/captures/successful-order.png
 [placed-order-details]: src/Codecool.CodecoolShop/wwwroot/img/captures/placed-order-details.png
+[update-database]: https://res.cloudinary.com/dqwtm9fw1/image/upload/v1642434570/CodeCoolShop/update_database_txm84b.png
+[enable-database]: https://res.cloudinary.com/dqwtm9fw1/image/upload/v1642434563/CodeCoolShop/enable-migrations_g6ep9i.png
